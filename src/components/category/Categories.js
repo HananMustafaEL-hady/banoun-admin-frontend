@@ -21,16 +21,7 @@ const Categories = ({get_All_Categories,categoriesArray}) => {
 
     return (
         <Fragment>
-            {categoriesArray&&
-                categoriesArray.map(sub=>{
-
-
-
-                    <SubCategory  sub= {sub} />
-
-                    console.log(sub.name);
-                })
-            }
+           
 
 
             

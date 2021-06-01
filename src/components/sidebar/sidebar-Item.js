@@ -6,7 +6,8 @@ import Divider from "@material-ui/core/Divider";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import ExpandLessIcon from "@material-ui/icons/ExpandLess";
 import Collapse from "@material-ui/core/Collapse";
-
+import { Fragment } from "react";
+import AddBook from '../category/AddBook'
 
 function SidebarItem({ depthStep = 10, depth = 0, expanded, item, ...rest }) {
     const [collapsed, setCollapsed] = React.useState(true);
@@ -66,11 +67,22 @@ function SidebarItem({ depthStep = 10, depth = 0, expanded, item, ...rest }) {
                   {subItem === "divider" ? (
                     <Divider style={{ margin: "6px 0" }} />
                   ) : (
+                    <Fragment>
+
                     <SidebarItem
                       depth={depth + 1}
                       depthStep={depthStep}
                       item={subItem}
                     />
+                    {/* <button>{subItem._id} {item._id}</button> */}
+                    {subItem._id&&item._id&&
+                                        <AddBook   subItem={subItem._id} item={item._id} />
+
+
+                    }
+                    
+                    </Fragment>
+
                   )}
                 </React.Fragment>
               ))}

@@ -145,7 +145,7 @@ export const addSubCategory=(formData,Id)=>async dispatch=>{
 
 //add sub category book
 
-export const addbook=(formData,category_id,book_id)=>async dispatch=>{
+export const addbook=(formData,category_id,sub_id)=>async dispatch=>{
 
 
 
@@ -158,7 +158,7 @@ export const addbook=(formData,category_id,book_id)=>async dispatch=>{
         }
     
     
-    const res=await axios.post(`/api/category/book/${category_id}/${book_id}`,formData,config);
+    const res=await axios.post(`/api/category/book/${category_id}/${sub_id}`,formData,config);
     
     dispatch({
     
