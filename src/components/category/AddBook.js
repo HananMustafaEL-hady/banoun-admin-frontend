@@ -11,6 +11,8 @@ const[formData,setFormData]=useState({
 
 });
 const{title,description,link}=formData;
+const [img_upload,Setimg_upload]=useState('');
+
 
  const onChange=e=>setFormData( {...formData,[e.target.name]:e.target.value });
 
@@ -20,7 +22,7 @@ const onSubmit= async e=>{
      e.preventDefault();
 
 
-     addbook({title,description,link},item,subItem);    
+     addbook(title,description,link,img_upload,item,subItem);    
     
 };
 
@@ -30,6 +32,8 @@ const onSubmit= async e=>{
         <h5 class=" text-primary">Add New Book</h5>
       
         <form className="form"  onSubmit={e=>onSubmit(e)} >
+        <input class="choose-file" type="file" name="image "  onChange ={e=>Setimg_upload(e)} />
+
       
           <div className="form-group">
             <input type="text"

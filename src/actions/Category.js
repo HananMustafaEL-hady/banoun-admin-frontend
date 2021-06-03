@@ -145,8 +145,24 @@ export const addSubCategory=(formData,Id)=>async dispatch=>{
 
 //add sub category book
 
-export const addbook=(formData,category_id,sub_id)=>async dispatch=>{
+export const addbook=(title,description,link,img_upload,category_id,sub_id)=>async dispatch=>{
+    const formData = new FormData();
 
+    
+        formData.append('title',title);
+        formData.append('description',description);
+        formData.append('link',link);
+
+        if(img_upload){
+
+            let img = img_upload.target.files[0];
+            console.log(img);
+           
+              
+             formData.append('image', img);
+             console.log(formData);
+        
+            }
 
 
     try {
@@ -267,6 +283,54 @@ export const addarticle=(formData,category_id,articles_id)=>async dispatch=>{
 
 
 
+
+// // add image 
+
+
+
+// export const Upload_img=(userid,img_upload)=>async dispatch=>{
+
+//     console.log(img_upload);
+// //     var img='';
+
+// // // let    img = img_upload.target.files[0];
+// // // console.log(img);
+
+// if(img_upload){
+//     let img = img_upload.target.files[0];
+//     console.log(img);
+   
+      
+//      const formData = new FormData();
+//      formData.append('image', img);
+//      console.log(formData);
+
+//     try {
+    
+//         const res=await axios.post(`/api/upload/user/${userid}`,formData);
+    
+    
+//                dispatch({
+//             type:uploadimg,
+//             payload:res.data
+//         });
+    
+        
+//     } catch (err) {
+    
+    
+//         dispatch({
+//             type:user_fail,
+//             payload:{msg:err}
+    
+//         });
+        
+//     }
+       
+
+// }
+
+// }
 
 
 

@@ -5,13 +5,7 @@ const SubCategory = ({sub}) => {
     return (
         <div>
             {sub&&sub.name}
-            cjhfurhfioeheihriofhefkefiefhihihhhhhhffffffffh
-            cjhfurhfioeheihriofhefkefiefhihihhhhhhffffffffh
-            cjhfurhfioeheihriofhefkefiefhihihhhhhhffffffffh
-            cjhfurhfioeheihriofhefkefiefhihihhhhhhffffffffh
-            cjhfurhfioeheihriofhefkefiefhihihhhhhhffffffffh
-            cjhfurhfioeheihriofhefkefiefhihihhhhhhffffffffh
-            cjhfurhfioeheihriofhefkefiefhihihhhhhhffffffffh
+           
 
         </div>
     )
