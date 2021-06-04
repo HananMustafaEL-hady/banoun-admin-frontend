@@ -7,7 +7,9 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import ExpandLessIcon from "@material-ui/icons/ExpandLess";
 import Collapse from "@material-ui/core/Collapse";
 import { Fragment } from "react";
-import AddBook from '../category/AddBook'
+import AddBook from '../category/AddBook';
+import AddArticle from '../category/AddArticle';
+
 
 function SidebarItem({ depthStep = 10, depth = 0, expanded, item, ...rest }) {
     const [collapsed, setCollapsed] = React.useState(true);
@@ -78,8 +80,10 @@ function SidebarItem({ depthStep = 10, depth = 0, expanded, item, ...rest }) {
                     {subItem._id&&item._id&&
                                         <AddBook   subItem={subItem._id} item={item._id} />
 
-
                     }
+                     {subItem._id && item._id && (
+                      <AddArticle subItem={subItem._id} item={item._id} />
+                    )}
                     
                     </Fragment>
 

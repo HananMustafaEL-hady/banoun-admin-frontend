@@ -222,7 +222,24 @@ export const addbook=(title,description,link,img_upload,category_id,sub_id)=>asy
 
 //add sub category book
 
-export const addarticle=(formData,category_id,articles_id)=>async dispatch=>{
+export const addarticle=(title,description,img_upload,category_id,articles_id)=>async dispatch=>{
+    const formData = new FormData();
+
+    
+    formData.append('title',title);
+    formData.append('description',description);
+  
+
+    if(img_upload){
+
+        let img = img_upload.target.files[0];
+        console.log(img);
+       
+          
+         formData.append('image', img);
+         console.log(formData);
+    
+        }
 
 
 
