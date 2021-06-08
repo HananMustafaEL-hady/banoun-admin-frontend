@@ -5,6 +5,7 @@ const SubCategory = ({sub}) => {
     return (
         <div>
             {sub&&sub.name}
+            
            
 
         </div>

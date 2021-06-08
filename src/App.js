@@ -13,7 +13,8 @@ import store from './store';
 
 import AddCategory from './components/category/AddCategory';
 
-import AddBook from './components/category/AddBook'
+import AddBook from './components/category/AddBook';
+import AddSub from './components/category/AddSub';
 
 // import SetToken from './helper/authToken';
 
@@ -47,6 +48,8 @@ const App=()=> {
 <Route exact path="/addbook" component={AddBook}/>
 
 <Route exact path="/addCategory" component={AddCategory}/>
+<Route exact path="/AddSub/:cate_id" component={AddSub}/>
+
 
 
 <section className="container">

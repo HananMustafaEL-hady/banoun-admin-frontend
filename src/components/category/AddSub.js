@@ -1,26 +1,29 @@
 import React ,{useState ,Fragment}from 'react'
-import {createCategory} from '../../actions/Category';
+import {addSubCategory} from '../../actions/Category';
 import { connect } from 'react-redux';
 import {Link, Redirect} from 'react-router-dom';
 
 
-const AddCategory = ({createCategory}) => {
+const AddSub = ({addSubCategory,match}) => {
 
     const[formData,setFormData]=useState({ name:'', description:'',});
 
     const{name,description}=formData;
     const [img_upload,Setimg_upload]=useState('');
+    console.log(match.params.cate_id)
 const onChange=e=>setFormData( {...formData,[e.target.name]:e.target.value });
 
 const onSubmit= async e=>{
     e.preventDefault();
-    createCategory(name,description,img_upload);  
+    addSubCategory(name,description,img_upload,match.params.cate_id);  
+
   
 };
 
     return (
         <Fragment>
-        <h1 class="large text-primary">اضافة قسم جديد</h1>
+        <h1 class=" text-primary">Add new Sub Category
+        </h1>
     
         <form className="form"  onSubmit={e=>onSubmit(e)} >
         <input class="choose-file" type="file" name="image "  onChange ={e=>Setimg_upload(e)} />
@@ -51,4 +54,4 @@ const onSubmit= async e=>{
     )
 }
 
-export default connect(null,{createCategory})(AddCategory)
+export default connect(null,{addSubCategory})(AddSub)

@@ -44,8 +44,23 @@ try {
 
 
 
-export const  createCategory=(name)=>async dispatch=>{
+export const  createCategory=(name,description,img_upload)=>async dispatch=>{
+    const formData = new FormData();
 
+    
+    formData.append('name',name);
+    formData.append('description',description);
+
+    if(img_upload){
+
+        let img = img_upload.target.files[0];
+        console.log(img);
+       
+          
+         formData.append('image', img);
+         console.log(formData);
+    
+        }
 
     console.log(name)
 try {
@@ -58,7 +73,7 @@ try {
     }
 
 
-const res=await axios.post('/api/category',{name},config);
+const res=await axios.post('/api/category',formData,config);
 
 dispatch({
 
@@ -92,7 +107,24 @@ catch (err) {
 //add sub category
 
 
-export const addSubCategory=(formData,Id)=>async dispatch=>{
+export const addSubCategory=(name,description,img_upload,Id)=>async dispatch=>{
+
+    const formData = new FormData();
+
+    
+    formData.append('name',name);
+    formData.append('description',description);
+
+    if(img_upload){
+
+        let img = img_upload.target.files[0];
+        console.log(img);
+       
+          
+         formData.append('image', img);
+         console.log(formData);
+    
+        }
 
 
 

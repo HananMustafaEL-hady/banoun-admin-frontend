@@ -601,3 +601,50 @@ button {
   width: 50%;
   height: 300px;
 }
+
+#customers {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#customers td,
+#customers th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#customers tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+#customers tr:hover {
+  background-color: #ddd;
+}
+
+#customers th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #04aa6d;
+}
+
+.round-img {
+  width: 100px;
+}
+
+.btn {
+  display: inline-block;
+  background: #04aa6d;
+  color: rgb(247, 241, 241);
+  padding: 0.4rem 1.3rem;
+  font-size: 1rem;
+  border: none;
+  cursor: pointer;
+  margin-left: 10px;
+  margin-right: 10px;
+
+  transition: opacity 0.2s ease-in;
+  outline: none;
+  border-radius: 10%;
+}
