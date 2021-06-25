@@ -1,0 +1,11 @@
+[33m0a17304[m[33m ([m[1;36mHEAD[m[33m, [m[1;32mremotes/origin/DEV/13[m[33m, [m[1;32mDEV/3[m[33m)[m HEAD@{0}: commit: card
+[33m2c0cfd3[m[33m ([m[1;31morigin/DEV/13[m[33m)[m HEAD@{1}: pull origin DEV/13 (start): checkout 2c0cfd31b838d1891ef664e20d1ae69a85316713
+[33m18d3e6e[m[33m ([m[1;32mDEV/13[m[33m)[m HEAD@{2}: commit: specialist
+[33m81eddc0[m HEAD@{3}: commit: user
+[33m8267e32[m HEAD@{4}: commit: blog
+[33mbe4c986[m HEAD@{5}: commit: user
+[33mff746f7[m HEAD@{6}: commit: user
+[33mb4913f7[m HEAD@{7}: pull origin DEV/13 (finish): returning to refs/heads/DEV/13
+[33mb4913f7[m HEAD@{8}: pull origin DEV/13 (start): checkout b4913f72aec4212865ab118d0d201a3c29d59fca
+[33me430d58[m HEAD@{9}: commit: consult
+[33mc02d6e5[m HEAD@{10}: commit (initial): consult

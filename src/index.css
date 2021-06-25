@@ -1,0 +1,8 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+    font-family: 'Boutros';
+    src: local('Boutros'), url(./fonts/Boutros/BoutrosART-Medium.otf) format('truetype');
+}
