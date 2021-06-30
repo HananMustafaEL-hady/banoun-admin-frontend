@@ -1,341 +1,240 @@
-import axios from  'axios';
+import axios from "axios";
 
+import {
+  Category_fail,
+  get_Categories,
+  update_Category,
+  delete_Category,
+  get_Category,
+  create_Category,
+} from "./type";
 
-
-import{
-Category_fail,
-get_Categories,
-update_Category,
-delete_Category,
-get_Category,
-create_Category
-
-} from './type'
-
-
-
-export const get_All_Categories=()=>async dispatch=>{
-
-try {
-
-    const res=await axios.get('/api/category');
-
+export const get_All_Categories = () => async (dispatch) => {
+  try {
+    const res = await axios.get(
+      "https://banounadmin2.herokuapp.com/api/category"
+    );
 
     dispatch({
-        type:get_Categories,
-        
-        payload:res.data
+      type: get_Categories,
+
+      payload: res.data,
     });
-
-    
-} catch (err) {
-
-
+  } catch (err) {
     dispatch({
-        type:Category_fail,
-        payload:{msg:err}
+      type: Category_fail,
+      payload: { msg: err },
 
-        // payload:{msg:err.response.statusText,status:err.response.status}
+      // payload:{msg:err.response.statusText,status:err.response.status}
     });
-    
-}
-   
-}
+  }
+};
 
-
-
-export const  createCategory=(name,description,img_upload)=>async dispatch=>{
+export const createCategory =
+  (name, description, img_upload) => async (dispatch) => {
     const formData = new FormData();
 
-    
-    formData.append('name',name);
-    formData.append('description',description);
+    formData.append("name", name);
+    formData.append("description", description);
 
-    if(img_upload){
+    if (img_upload) {
+      let img = img_upload.target.files[0];
+      console.log(img);
 
-        let img = img_upload.target.files[0];
-        console.log(img);
-       
-          
-         formData.append('image', img);
-         console.log(formData);
-    
-        }
-
-    console.log(name)
-try {
-
-
-    const config={
-        headers:{
-            'Content-Type':'application/json'
-        }
+      formData.append("image", img);
+      console.log(formData);
     }
 
+    console.log(name);
+    try {
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      };
 
-const res=await axios.post('/api/category',formData,config);
+      const res = await axios.post(
+        "https://banounadmin2.herokuapp.com/api/category",
+        formData,
+        config
+      );
 
-dispatch({
+      dispatch({
+        type: get_Categories,
+        payload: res.data,
+      });
+    } catch (err) {
+      const errors = err.response.data.errors;
+      if (errors) {
+        errors.forEach(
+          (error) => console.log(error)
+          // dispatch(setAlert(error.msg,'danger'))
+        );
+      }
 
-    type:get_Categories,
-    payload:res.data
-})
-}
-
-catch (err) {
-    const errors=err.response.data.errors;
-    if(errors){
-        errors.forEach(error => 
-
-            console.log(error)
-            // dispatch(setAlert(error.msg,'danger'))
-            
-            );
+      dispatch({
+        type: Category_fail,
+        payload: { msg: err },
+      });
     }
-    
-    dispatch({
-        type:Category_fail,
-        payload:{msg:err}
-    });
-    
-}
-
-
-}
-
+  };
 
 //add sub category
 
-
-export const addSubCategory=(name,description,img_upload,Id)=>async dispatch=>{
-
+export const addSubCategory =
+  (name, description, img_upload, Id) => async (dispatch) => {
     const formData = new FormData();
 
-    
-    formData.append('name',name);
-    formData.append('description',description);
+    formData.append("name", name);
+    formData.append("description", description);
 
-    if(img_upload){
+    if (img_upload) {
+      let img = img_upload.target.files[0];
+      console.log(img);
 
-        let img = img_upload.target.files[0];
-        console.log(img);
-       
-          
-         formData.append('image', img);
-         console.log(formData);
-    
-        }
-
-
+      formData.append("image", img);
+      console.log(formData);
+    }
 
     try {
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      };
 
-        const config={
-            headers:{
-                'Content-Type':'application/json'
-            }
-        }
-    
-    
-    const res=await axios.post(`/api/category/subGategory/${Id}`,formData,config);
-    
-    dispatch({
-    
-        type:get_Categories,
-        payload:res.data
-    });
-    
-    
-    
-    
-    
+      const res = await axios.post(
+        `https://banounadmin2.herokuapp.com/api/category/subGategory/${Id}`,
+        formData,
+        config
+      );
+
+      dispatch({
+        type: get_Categories,
+        payload: res.data,
+      });
+    } catch (err) {
+      console.log(err);
+
+      dispatch({
+        type: Category_fail,
+        payload: { msg: err },
+      });
     }
-    
-    catch (err) {
-      
-        console.log(err);
-        
-        dispatch({
-            type:Category_fail,
-          payload:{msg:err}
-
-        });
-        
-    }
-    
-
-
-
-
-}
-
-
-
-
-
-
+  };
 
 //add sub category book
 
-export const addbook=(title,description,link,img_upload,category_id,sub_id)=>async dispatch=>{
+export const addbook =
+  (title, description, link, img_upload, category_id, sub_id) =>
+  async (dispatch) => {
     const formData = new FormData();
 
-    
-        formData.append('title',title);
-        formData.append('description',description);
-        formData.append('link',link);
+    formData.append("title", title);
+    formData.append("description", description);
+    formData.append("link", link);
 
-        if(img_upload){
+    if (img_upload) {
+      let img = img_upload.target.files[0];
+      console.log(img);
 
-            let img = img_upload.target.files[0];
-            console.log(img);
-           
-              
-             formData.append('image', img);
-             console.log(formData);
-        
-            }
-
+      formData.append("image", img);
+      console.log(formData);
+    }
 
     try {
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      };
 
-        const config={
-            headers:{
-                'Content-Type':'application/json'
-            }
-        }
-    
-    
-    const res=await axios.post(`/api/category/book/${category_id}/${sub_id}`,formData,config);
-    
-    dispatch({
-    
-        type:get_Categories,
-        payload:res.data
-    });
-        
-    
-    
-    
-    
-    
-    
+      const res = await axios.post(
+        `https://banounadmin2.herokuapp.com/api/category/book/${category_id}/${sub_id}`,
+        formData,
+        config
+      );
+
+      dispatch({
+        type: get_Categories,
+        payload: res.data,
+      });
+    } catch (err) {
+      // const errors=err.response.data.errors;
+      // if(errors){
+      //     errors.forEach(error =>
+
+      //         console.log(error)
+      //         // dispatch(setAlert(error.msg,'danger'))
+
+      //         );
+      // }
+      console.log(err);
+
+      dispatch({
+        type: Category_fail,
+        //  payload:{msg:err.response.statusText,status:err.response.status}
+        payload: { msg: err },
+      });
     }
-    
-    catch (err) {
-        // const errors=err.response.data.errors;
-        // if(errors){
-        //     errors.forEach(error => 
-    
-        //         console.log(error)
-        //         // dispatch(setAlert(error.msg,'danger'))
-                
-        //         );
-        // }
-        console.log(err);
-        
-        dispatch({
-            type:Category_fail,
-          //  payload:{msg:err.response.statusText,status:err.response.status}
-          payload:{msg:err}
-
-        });
-        
-    }
-    
-
-
-
-
-}
-
-
-
+  };
 
 //add sub category book
 
-export const addarticle=(title,description,img_upload,category_id,articles_id)=>async dispatch=>{
+export const addarticle =
+  (title, description, img_upload, category_id, articles_id) =>
+  async (dispatch) => {
     const formData = new FormData();
 
-    
-    formData.append('title',title);
-    formData.append('description',description);
-  
+    formData.append("title", title);
+    formData.append("description", description);
 
-    if(img_upload){
+    if (img_upload) {
+      let img = img_upload.target.files[0];
+      console.log(img);
 
-        let img = img_upload.target.files[0];
-        console.log(img);
-       
-          
-         formData.append('image', img);
-         console.log(formData);
-    
-        }
-
-
+      formData.append("image", img);
+      console.log(formData);
+    }
 
     try {
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      };
 
-        const config={
-            headers:{
-                'Content-Type':'application/json'
-            }
-        }
-    
-    
-    const res=await axios.post(`/api/category/articles/${category_id}/${articles_id}`,formData,config);
-    
-    dispatch({
-    
-        type:get_Categories,
-        payload:res.data
-    });
-        
-    
-    
-    
-    
-    
-    
+      const res = await axios.post(
+        `https://banounadmin2.herokuapp.com/api/category/articles/${category_id}/${articles_id}`,
+        formData,
+        config
+      );
+
+      dispatch({
+        type: get_Categories,
+        payload: res.data,
+      });
+    } catch (err) {
+      // const errors=err.response.data.errors;
+      // if(errors){
+      //     errors.forEach(error =>
+
+      //         console.log(error)
+      //         // dispatch(setAlert(error.msg,'danger'))
+
+      //         );
+      // }
+      console.log(err);
+
+      dispatch({
+        type: Category_fail,
+        //  payload:{msg:err.response.statusText,status:err.response.status}
+        payload: { msg: err },
+      });
     }
-    
-    catch (err) {
-        // const errors=err.response.data.errors;
-        // if(errors){
-        //     errors.forEach(error => 
-    
-        //         console.log(error)
-        //         // dispatch(setAlert(error.msg,'danger'))
-                
-        //         );
-        // }
-        console.log(err);
-        
-        dispatch({
-            type:Category_fail,
-          //  payload:{msg:err.response.statusText,status:err.response.status}
-          payload:{msg:err}
+  };
 
-        });
-        
-    }
-    
-
-
-
-
-}
-
-
-
-
-
-
-
-// // add image 
-
-
+// // add image
 
 // export const Upload_img=(userid,img_upload)=>async dispatch=>{
 
@@ -348,43 +247,30 @@ export const addarticle=(title,description,img_upload,category_id,articles_id)=>
 // if(img_upload){
 //     let img = img_upload.target.files[0];
 //     console.log(img);
-   
-      
+
 //      const formData = new FormData();
 //      formData.append('image', img);
 //      console.log(formData);
 
 //     try {
-    
+
 //         const res=await axios.post(`/api/upload/user/${userid}`,formData);
-    
-    
+
 //                dispatch({
 //             type:uploadimg,
 //             payload:res.data
 //         });
-    
-        
+
 //     } catch (err) {
-    
-    
+
 //         dispatch({
 //             type:user_fail,
 //             payload:{msg:err}
-    
+
 //         });
-        
+
 //     }
-       
 
 // }
 
 // }
-
-
-
-
-
-
-
-
