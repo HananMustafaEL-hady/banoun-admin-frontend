@@ -1,19 +1,25 @@
 import React, { useEffect } from "react";
 import CardDemand from "../atoms/cardDemand";
 import CardAccept from "../atoms/cardaccept";
+import Cardconnectus from "../atoms/Cardconnectus";
 import { connect } from "react-redux";
 import { GetAllSpecialist } from "../../redux/actions/specialist";
 import { GetEventsPending } from "../../redux/actions/event";
+import { Getconnectus } from "../../redux/actions/connectus";
+
 const AdminTabs = ({
   color,
   GetAllSpecialist,
   specialistsPending,
   GetEventsPending,
   eventsPending,
+  Getconnectus,
+  connectus,
 }) => {
   useEffect(() => {
     GetAllSpecialist();
     GetEventsPending();
+    Getconnectus();
   }, []);
 
   const [openTab, setOpenTab] = React.useState(1);
@@ -29,6 +35,7 @@ const AdminTabs = ({
             <li className="text-6xl text-center text-silver-tree mt-10">
               بنون
             </li>
+
             <li className="-mb-px mr-2 last:mr-0 flex-auto text-center mt-28">
               <a
                 className={
@@ -48,6 +55,7 @@ const AdminTabs = ({
                 قبول المختصين
               </a>
             </li>
+
             <li className="-mb-px mr-2 last:mr-0 flex-auto text-center -mt-44">
               <a
                 className={
@@ -68,6 +76,26 @@ const AdminTabs = ({
               </a>
             </li>
 
+            <li className="-mb-px mr-2 last:mr-0 flex-auto text-center -mt-44">
+              <a
+                className={
+                  " block leading-normal " +
+                  (openTab === 3
+                    ? "text-silver-tree bg-" + color + "-600"
+                    : "text-" + color + "-200 bg-silver-tree-200")
+                }
+                onClick={(e) => {
+                  e.preventDefault();
+                  setOpenTab(3);
+                }}
+                data-toggle="tab"
+                href="#link2"
+                role="tablist"
+              >
+                تواصل معانا{" "}
+              </a>
+            </li>
+
             <li className="text-silver-tree-500 text-center mb-20 ">
               <a href="#">
                 <i className="fas fa-sign-out-alt p-2"></i>تسجيل الخروج
@@ -78,7 +106,7 @@ const AdminTabs = ({
             <div className="px-4 py-5 flex-auto">
               <div className="tab-content tab-space">
                 <div className={openTab === 1 ? "block" : "hidden"} id="link1">
-                  {specialistsPending ? (
+                  {specialistsPending.length != 0 ? (
                     specialistsPending?.map((item) => (
                       <CardAccept
                         docName={item.username}
@@ -88,7 +116,7 @@ const AdminTabs = ({
                       />
                     ))
                   ) : (
-                    <pCardAccept desc="لا يوجد طلبات حتي الان " />
+                    <p>لا توجد طلبات حتي الان</p>
                   )}
                 </div>
 
@@ -104,6 +132,19 @@ const AdminTabs = ({
                       />
                     ))}
                 </div>
+
+                <div className={openTab === 3 ? "block" : "hidden"} id="link2">
+                  {connectus &&
+                    connectus?.map((item) => (
+                      <Cardconnectus
+                        docName={item?.name}
+                        message={item?.text}
+                        email={item?.email}
+                        date={item?.date}
+                        id={item._id}
+                      />
+                    ))}
+                </div>
               </div>
             </div>
           </div>
@@ -115,8 +156,11 @@ const AdminTabs = ({
 const mapStateToProps = (state) => ({
   specialistsPending: state.specialist.specialists,
   eventsPending: state.event.EventsPending,
+  connectus: state.connectus.connectus,
 });
 
-export default connect(mapStateToProps, { GetAllSpecialist, GetEventsPending })(
-  AdminTabs
-);
+export default connect(mapStateToProps, {
+  GetAllSpecialist,
+  Getconnectus,
+  GetEventsPending,
+})(AdminTabs);
