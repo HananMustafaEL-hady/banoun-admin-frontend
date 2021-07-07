@@ -4,9 +4,9 @@ import CardAccept from "../atoms/cardaccept";
 import Cardconnectus from "../atoms/Cardconnectus";
 import { connect } from "react-redux";
 import { GetAllSpecialist } from "../../redux/actions/specialist";
-import { GetEventsPending } from "../../redux/actions/event";
+import { GetEventsPending, GetEventsaccepted } from "../../redux/actions/event";
 import { Getconnectus } from "../../redux/actions/connectus";
-
+import { Cardacceptevent } from "../atoms/Cardacceptevent";
 const AdminTabs = ({
   color,
   GetAllSpecialist,
@@ -15,11 +15,14 @@ const AdminTabs = ({
   eventsPending,
   Getconnectus,
   connectus,
+  GetEventsaccepted,
+  eventsaccepted,
 }) => {
   useEffect(() => {
     GetAllSpecialist();
     GetEventsPending();
     Getconnectus();
+    GetEventsaccepted();
   }, []);
 
   const [openTab, setOpenTab] = React.useState(1);
@@ -52,7 +55,7 @@ const AdminTabs = ({
                 href="#link1"
                 role="tablist"
               >
-                قبول المختصين
+                قبول المتخصصين
               </a>
             </li>
 
@@ -72,7 +75,7 @@ const AdminTabs = ({
                 href="#link2"
                 role="tablist"
               >
-                طلبات التحدث
+                طلبات الحدث
               </a>
             </li>
 
@@ -92,17 +95,37 @@ const AdminTabs = ({
                 href="#link2"
                 role="tablist"
               >
-                تواصل معانا{" "}
+                تواصل معنا{" "}
+              </a>
+            </li>
+
+            <li className="-mb-px mr-2 last:mr-0 flex-auto text-center -mt-44">
+              <a
+                className={
+                  " block leading-normal " +
+                  (openTab === 4
+                    ? "text-silver-tree bg-" + color + "-600"
+                    : "text-" + color + "-200 bg-silver-tree-200")
+                }
+                onClick={(e) => {
+                  e.preventDefault();
+                  setOpenTab(4);
+                }}
+                data-toggle="tab"
+                href="#link1"
+                role="tablist"
+              >
+                الاحداث المقبولة
               </a>
             </li>
 
             <li className="text-silver-tree-500 text-center mb-20 ">
               <a href="#">
-                <i className="fas fa-sign-out-alt p-2"></i>تسجيل الخروج
+                {/* <i className="fas fa-sign-out-alt p-2"></i> */}
               </a>
             </li>
           </ul>
-          <div className="relative flex flex-col min-w-0 break-words bg-alabaster-500 w-full h-screen	 rounded">
+          <div className="relative flex flex-col min-w-0 break-words bg-alabaster-500 w-full h-screen overflow-auto	 rounded">
             <div className="px-4 py-5 flex-auto">
               <div className="tab-content tab-space">
                 <div className={openTab === 1 ? "block" : "hidden"} id="link1">
@@ -137,11 +160,25 @@ const AdminTabs = ({
                   {connectus &&
                     connectus?.map((item) => (
                       <Cardconnectus
-                        docName={item?.name}
+                        username={item?.name}
                         message={item?.text}
                         email={item?.email}
                         date={item?.date}
                         id={item._id}
+                      />
+                    ))}
+                </div>
+
+                <div className={openTab === 4 ? "block" : "hidden"} id="link2">
+                  {eventsaccepted &&
+                    eventsaccepted?.map((item) => (
+                      <Cardacceptevent
+                        docName={item?.Specialist?.username}
+                        desc={item?.Specialist?.Specialization}
+                        address={item?.Specialization}
+                        date={item?.Date}
+                        id={item._id}
+                        zoomlink={item.zoom}
                       />
                     ))}
                 </div>
@@ -156,6 +193,8 @@ const AdminTabs = ({
 const mapStateToProps = (state) => ({
   specialistsPending: state.specialist.specialists,
   eventsPending: state.event.EventsPending,
+  eventsaccepted: state.event.Eventaccepted,
+
   connectus: state.connectus.connectus,
 });
 
@@ -163,4 +202,5 @@ export default connect(mapStateToProps, {
   GetAllSpecialist,
   Getconnectus,
   GetEventsPending,
+  GetEventsaccepted,
 })(AdminTabs);

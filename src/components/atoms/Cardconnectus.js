@@ -8,7 +8,7 @@ import { Deleteconnectus } from "../../redux/actions/connectus";
 const Cardconnectus = ({
   email,
   date,
-  userName,
+  username,
   message,
   id,
   Deleteconnectus,
@@ -18,7 +18,7 @@ const Cardconnectus = ({
       <div className="bg-white rounded w-9/12 h-44 m-auto mt-10 flex justify-between">
         <div>
           <p className=" text-gray-400 mr-8 mt-4">
-            اسم المرسل <span className=" text-black p-5">{userName}</span>
+            اسم المرسل <span className=" text-black p-5">{username}</span>
           </p>
           <p className=" text-gray-400  mr-7 mt-2">
             الشكوي <span className=" text-black p-10">{message}</span>
@@ -33,7 +33,7 @@ const Cardconnectus = ({
           </p>
         </div>
 
-        <div className=" mt-8">
+        <div className=" mt-8 flex mr-2">
           <Modalconnectus id={id} />
 
           <Btn

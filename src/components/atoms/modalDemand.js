@@ -1,8 +1,18 @@
 import React from "react";
 import { Btn } from "./btn";
 import { connect } from "react-redux";
-import { GetOneEvent, DeleteOneSevent } from "../../redux/actions/event";
-const ModalDemand = ({ GetOneEvent, event, DeleteOneSevent, eveid }) => {
+import {
+  GetOneEvent,
+  DeleteOneSevent,
+  acceptEvent,
+} from "../../redux/actions/event";
+const ModalDemand = ({
+  GetOneEvent,
+  event,
+  DeleteOneSevent,
+  eveid,
+  acceptEvent,
+}) => {
   const [showModal, setShowModal] = React.useState(false);
   const onClick = function (event) {
     setShowModal(true);
@@ -79,6 +89,8 @@ const ModalDemand = ({ GetOneEvent, event, DeleteOneSevent, eveid }) => {
                   <Btn
                     stylee=" bg-silver-tree text-white h-10 ml-5"
                     methodeshow={setShowModal}
+                    methodSpecialist={acceptEvent}
+                    id={eveid}
                   >
                     {" "}
                     تاكيد الحدث
@@ -110,4 +122,5 @@ const mapStateToProps = (state) => ({
 export default connect(mapStateToProps, {
   GetOneEvent,
   DeleteOneSevent,
+  acceptEvent,
 })(ModalDemand);

@@ -13,8 +13,8 @@ export const Get_Event = "Get_Event";
 
 export const Delete_event = "Delete_event";
 export const Delete_specialist = "Delete_specialist";
-
 export const Get_All_connectus = "Get_All_connectus";
 export const send_connectus = "send_connectus";
 export const Error_connectus = "Error_connectus";
 export const Delete_connectus = "Delete_connectus";
+export const Event_accepted = "Event_accepted";

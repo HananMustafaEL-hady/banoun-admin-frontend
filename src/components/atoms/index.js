@@ -3,3 +3,7 @@ export * from "./cardaccept";
 export * from "./cardDemand";
 export * from "./modalAccept";
 export * from "./modalDemand";
+export * from "./clientArchive";
+export * from "./button";
+export * from "./icon";
+export * from "./textField";

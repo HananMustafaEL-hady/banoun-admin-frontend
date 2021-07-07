@@ -4,10 +4,30 @@ import {
   Get_Events_Pending,
   Get_Event,
   Error_Event,
+  Event_accepted,
   Get_Event_accepted,
   Delete_event,
 } from "./types";
 
+export const GetEventsaccepted = () => async (dispatch) => {
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  };
+  try {
+    const res = await client.get("/event/accepted", config);
+    dispatch({
+      type: Get_Event_accepted,
+      payload: res.data,
+    });
+  } catch (err) {
+    dispatch({
+      type: Error_Event,
+      payload: { msg: err },
+    });
+  }
+};
 export const GetEventsPending = () => async (dispatch) => {
   const config = {
     headers: {
@@ -34,6 +54,21 @@ export const DeleteOneSevent = (id) => async (dispatch) => {
     dispatch({
       type: Delete_event,
       payload: id,
+    });
+  } catch (err) {
+    dispatch({
+      type: Error_Event,
+      payload: { msg: err },
+    });
+  }
+};
+
+export const acceptEvent = (id) => async (dispatch) => {
+  try {
+    const res = await client.patch(`/event/${id}`);
+    dispatch({
+      type: Event_accepted,
+      payload: res.data,
     });
   } catch (err) {
     dispatch({
